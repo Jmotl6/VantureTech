@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vanture — Business Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" id="logoWrap">
+        <img id="companyLogo" alt="Company logo" src="" style="display:none;max-height:36px;" />
+        <span id="logoText">VANTURE</span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="index.html#features">Features</a>
+        <a class="nav-link" href="index.html#pricing">Pricing</a>
+        <a class="nav-link" href="index.html#contact">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" id="demoToggle">Demo ▾</button>
+          <div class="dropdown-menu" aria-hidden="true">
+            <a class="dropdown-item" href="business.html">Business</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <label class="ui-switch" title="Toggle light mode">
+          <input id="modeSwitch" type="checkbox" aria-label="Toggle light mode">
+          <div class="slider"><div class="switch-circle"></div></div>
+        </label>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--parallax reveal-on-scroll">
+      <div class="container hero-inner reveal-stagger">
+        <h1 class="hero-title">Find the best locations for your mobile business</h1>
+        <p class="hero-sub">Browse demo parking spots and preview a vendor dashboard.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#market">Browse Spots</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="market" class="features reveal-on-scroll">
+      <div class="container">
+        <h2 class="section-title">Parking Spot Marketplace</h2>
+        <p class="section-sub">Demo listings for rentable spots.</p>
+
+        <div class="b2b-grid reveal-stagger">
+          <article class="parking-card demo-listing" data-id="p1" tabindex="0">
+            <div class="card-media">
+              <img loading="lazy" src="images/Vanturestockparkinggragephoto2.jpg" alt="Corner Spot A1" />
+              <div class="card-badge">High visibility</div>
+            </div>
+            <div class="parking-info">
+              <h3>Corner Spot A1</h3>
+              <p>123 Market St — High visibility, near main plaza.</p>
+            </div>
+            <div class="card-footer">
+              <div class="price">$45/day</div>
+              <div class="card-actions">
+                <button class="btn view-details" data-id="p1" aria-label="View details for Corner Spot A1">Details</button>
+                <button class="btn btn-primary reserve-btn" data-id="p1" aria-label="Reserve Corner Spot A1">Reserve</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="parking-card demo-listing" data-id="p2" tabindex="0">
+            <div class="card-media">
+              <img loading="lazy" src="images/Targetparking lot.jpg" alt="Target Parking Lot" />
+            </div>
+            <div class="parking-info">
+              <h3>Target Parking Lot</h3>
+              <p>78 Commerce Ave — Large lot, suitable for fleets.</p>
+            </div>
+            <div class="card-footer">
+              <div class="price">$60/day</div>
+              <div class="card-actions">
+                <button class="btn view-details" data-id="p2" aria-label="View details for Target Parking Lot">Details</button>
+                <button class="btn btn-primary reserve-btn" data-id="p2" aria-label="Reserve Target Parking Lot">Reserve</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="parking-card demo-listing" data-id="p3" tabindex="0">
+            <div class="card-media">
+              <img loading="lazy" src="images/Football stadium parking lot.jpg" alt="Football Stadium Lot" />
+            </div>
+            <div class="parking-info">
+              <h3>Football Stadium Lot</h3>
+              <p>Near Stadium — High capacity, event-ready.</p>
+            </div>
+            <div class="card-footer">
+              <div class="price">$95/day</div>
+              <div class="card-actions">
+                <button class="btn view-details" data-id="p3" aria-label="View details for Football Stadium Lot">Details</button>
+                <button class="btn btn-primary reserve-btn" data-id="p3" aria-label="Reserve Football Stadium Lot">Reserve</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="parking-card demo-listing" data-id="p4" tabindex="0">
+            <div class="card-media">
+              <img loading="lazy" src="images/Vanturestockphoto4.jpg" alt="Urban Spot D5" />
+            </div>
+            <div class="parking-info">
+              <h3>Urban Spot D5</h3>
+              <p>Downtown curb — Great foot traffic, midday peak.</p>
+            </div>
+            <div class="card-footer">
+              <div class="price">$55/day</div>
+              <div class="card-actions">
+                <button class="btn view-details" data-id="p4" aria-label="View details for Urban Spot D5">Details</button>
+                <button class="btn btn-primary reserve-btn" data-id="p4" aria-label="Reserve Urban Spot D5">Reserve</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="parking-card demo-listing" data-id="p5" tabindex="0">
+            <div class="card-media">
+              <img loading="lazy" src="images/Parkinglot gasstation.jpg" alt="Gas Station Parking Lot" />
+            </div>
+            <div class="parking-info">
+              <h3>Gas Station Parking Lot</h3>
+              <p>Neighborhood lot — Regular daytime availability.</p>
+            </div>
+            <div class="card-footer">
+              <div class="price">$40/day</div>
+              <div class="card-actions">
+                <button class="btn view-details" data-id="p5" aria-label="View details for Gas Station Parking Lot">Details</button>
+                <button class="btn btn-primary reserve-btn" data-id="p5" aria-label="Reserve Gas Station Parking Lot">Reserve</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="parking-card demo-listing" data-id="p6" tabindex="0">
+            <div class="card-media">
+              <img loading="lazy" src="images/Vanturestockhptoto2.jpg" alt="Garage F1" />
+            </div>
+            <div class="parking-info">
+              <h3>Garage F1</h3>
+              <p>Covered garage — Secure and weather-protected.</p>
+            </div>
+            <div class="card-footer">
+              <div class="price">$80/day</div>
+              <div class="card-actions">
+                <button class="btn view-details" data-id="p6" aria-label="View details for Garage F1">Details</button>
+                <button class="btn btn-primary reserve-btn" data-id="p6" aria-label="Reserve Garage F1">Reserve</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="parking-card demo-listing" data-id="p7" tabindex="0">
+            <div class="card-media">
+              <img loading="lazy" src="images/walmartparkinglot.jpg" alt="Walmart Parking Lot" />
+            </div>
+            <div class="parking-info">
+              <h3>Walmart Parking Lot</h3>
+              <p>Flexible space — Good for pop-ups and markets.</p>
+            </div>
+            <div class="card-footer">
+              <div class="price">$50/day</div>
+              <div class="card-actions">
+                <button class="btn view-details" data-id="p7" aria-label="View details for Walmart Parking Lot">Details</button>
+                <button class="btn btn-primary reserve-btn" data-id="p7" aria-label="Reserve Walmart Parking Lot">Reserve</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="dashboard-preview reveal-on-scroll">
+          <h3>Dashboard Preview</h3>
+          <div class="dashboard-grid">
+            <div class="dash-card">Revenue: $4,200</div>
+            <div class="dash-card">Top Location: Corner Spot A1</div>
+            <div class="dash-card">Upcoming Reservations: 3</div>
+          </div>
+        </div>
+        
+          <section id="business-features" class="features reveal-on-scroll" aria-label="Vendor Tools">
+            <h3 class="section-title">Vendor Tools</h3>
+            <p class="section-sub">Manage your listings, analytics, and availability with ease.</p>
+            <div class="features-grid reveal-stagger" style="margin-top:1rem">
+              <div class="flip-card">
+                <div class="flip-card__content"><p class="flip-card__front-text">Listings</p></div>
+                <div class="flip-card__back">
+                  <div class="back-content">
+                    <p class="flip-card__title">Manage Listings</p>
+                    <p class="flip-card__description">Create and edit spot details, images, and pricing.</p>
+                  </div>
+                  <div class="circle"></div>
+                  <div class="circle" id="right"></div>
+                  <div class="circle" id="bottom"></div>
+                </div>
+              </div>
+
+              <div class="flip-card">
+                <div class="flip-card__content"><p class="flip-card__front-text">Analytics</p></div>
+                <div class="flip-card__back">
+                  <div class="back-content">
+                    <p class="flip-card__title">Analytics</p>
+                    <p class="flip-card__description">View revenue, traffic, and booking trends for your spots.</p>
+                  </div>
+                  <div class="circle"></div>
+                  <div class="circle" id="right"></div>
+                  <div class="circle" id="bottom"></div>
+                </div>
+              </div>
+
+              <div class="flip-card">
+                <div class="flip-card__content"><p class="flip-card__front-text">Availability</p></div>
+                <div class="flip-card__back">
+                  <div class="back-content">
+                    <p class="flip-card__title">Availability</p>
+                    <p class="flip-card__description">Set open hours, blocked dates and recurring availability rules.</p>
+                  </div>
+                  <div class="circle"></div>
+                  <div class="circle" id="right"></div>
+                  <div class="circle" id="bottom"></div>
+                </div>
+              </div>
+
+              <div class="flip-card">
+                <div class="flip-card__content"><p class="flip-card__front-text">Payments</p></div>
+                <div class="flip-card__back">
+                  <div class="back-content">
+                    <p class="flip-card__title">Payments</p>
+                    <p class="flip-card__description">Connect payouts, view invoices, and manage billing settings.</p>
+                  </div>
+                  <div class="circle"></div>
+                  <div class="circle" id="right"></div>
+                  <div class="circle" id="bottom"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </div>
+    </section>
+
+    <!-- Details modal -->
+    <div class="modal" id="detailsModal" aria-hidden="true">
+      <div class="modal-inner">
+        <button class="btn" id="closeDetailsModal">Close</button>
+        <h3 id="detailsTitle">Spot Details</h3>
+        <div id="detailsBody">
+          <img src="https://via.placeholder.com/720x360?text=Spot+Detail" alt="Spot" style="width:100%;height:auto;margin-bottom:1rem" />
+          <p><strong>Estimated foot traffic:</strong> Medium</p>
+          <p><strong>Regulations:</strong> Demo-only restrictions apply.</p>
+          <p><strong>Hours:</strong> 6:00 — 22:00</p>
+          <button class="btn btn-primary" id="openReserveBtn" data-spot="p1">Reserve Spot</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+      <!-- Reserve modal -->
+      <div class="modal" id="reserveModal" aria-hidden="true">
+        <div class="modal-inner">
+            <button class="btn" id="closeReserveModal">Close</button>
+            <h3 id="reserveTitle">Reserve Spot</h3>
+            <form id="reserveForm">
+              <input type="hidden" name="spot" id="reserveSpot" value="">
+              <div id="reserveNotice" class="reserve-notice" aria-live="polite" style="display:none"></div>
+              <div id="reserveToast" class="reserve-toast" aria-live="polite" role="status" style="display:none"></div>
+              <div class="form-row">
+                <label>Date</label>
+                <input type="hidden" name="date_start" id="reserveDateStart" value="">
+                <input type="hidden" name="date_end" id="reserveDateEnd" value="">
+              </div>
+
+              <div class="reserve-controls">
+                <div class="reserve-spot-top">
+                  <img id="reserveSpotImage" src="" alt="Spot photo" class="reserve-spot-photo">
+                </div>
+
+                <div id="reserveCalendar" class="reserve-calendar-wrap" aria-label="Reservation calendar"></div>
+
+                <div class="reserve-price" style="width:100%;text-align:left">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div>Price per day: <span id="reservePerDay">$0</span></div><div style="font-size:.85rem;color:var(--muted)">Typical ~$200/mo</div></div>
+                  <div style="margin-top:.35rem">Date range: <span id="reserveRangeText">—</span></div>
+                  <div style="margin-top:.6rem;display:flex;align-items:center;justify-content:space-between"><div>Total:</div><div class="total-amount" id="reserveTotal">$0.00</div></div>
+                  <div class="reserve-cap" id="reserveCapNote" aria-live="polite" style="color:var(--muted);font-size:0.9rem;margin-top:6px"></div>
+                  <div class="blocked-chips" id="blockedChips" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <label>Notes<textarea name="notes" rows="3"></textarea></label>
+              <div style="display:flex;gap:.5rem;margin-top:.6rem">
+                <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+                <button type="button" class="btn" id="reserveCancel">Cancel</button>
+              </div>
+            </form>
+          </div>
+      </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="logo small">VANTURE</div>
+        <small>© <span id="year">2025</span> Vanture. All rights reserved.</small>
+      </div>
+      <div class="footer-right">
+        <nav class="footer-nav">
+          <a href="index.html">Home</a>
+          <a href="index.html#features">Features</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

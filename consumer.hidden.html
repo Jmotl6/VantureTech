@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vanture  Consumer Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#0b66ff;--accent-2:#2563eb;--glass:rgba(255,255,255,0.04)}
+    html,body{height:100%;font-family:Inter,system-ui,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#061025 0%,#071627 60%);color:#e6eef6;margin:0}
+    .container{max-width:1100px;margin:0 auto;padding:1rem}
+    .site-header{padding:.8rem 0}
+    .header-inner{display:flex;align-items:center;justify-content:space-between}
+    .logo{font-weight:700;letter-spacing:2px;color:var(--accent)}
+    .hero{padding:2rem 0}
+    .hero-title{font-size:2rem;margin:.2rem 0}
+    .vendors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.25rem 0}
+    .vendor-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .16s ease,box-shadow .16s}
+    .vendor-card:focus,.vendor-card:hover{transform:translateY(-6px);box-shadow:0 8px 30px rgba(2,6,23,0.6);outline:2px solid rgba(11,102,255,0.12)}
+    .vendor-card .thumb{height:140px;width:100%;object-fit:cover;display:block}
+    .vendor-info{padding:.8rem}
+    .vendor-title{font-weight:600;margin-bottom:.25rem}
+    .vendor-desc{color:var(--muted);font-size:.95rem}
+
+    /* Centered modal (menu) */
+    .overlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.6),rgba(2,6,23,0.75));display:none;align-items:center;justify-content:center;z-index:160}
+    .overlay[data-open="true"]{display:flex}
+    .menu-card{background:linear-gradient(180deg,#061424, #07192b);width:min(920px,96%);max-height:88vh;border-radius:14px;box-shadow:0 20px 60px rgba(3,8,20,0.7);overflow:hidden;display:grid;grid-template-columns:1fr 320px}
+    .menu-left{padding:1rem 1rem;overflow:auto}
+    .menu-right{background:linear-gradient(180deg,rgba(6,12,30,0.3),transparent);padding:1rem;border-left:1px solid rgba(255,255,255,0.03)}
+    .vendor-header{display:flex;gap:12px;align-items:center}
+    .vendor-header img{width:72px;height:72px;border-radius:10px;object-fit:cover}
+    .menu-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.8rem;margin-top:1rem}
+    .item-card{background:var(--glass);padding:.6rem;border-radius:10px;display:flex;gap:.6rem;align-items:center}
+    .item-meta{flex:1}
+    .item-name{font-weight:600}
+    .item-desc{color:var(--muted);font-size:.9rem}
+    .item-price{font-weight:700;color:var(--accent-2)}
+
+    /* Cart right column */
+    .cart-summary{display:flex;flex-direction:column;gap:.6rem}
+    .cart-items{min-height:120px;overflow:auto;padding:.25rem;border-radius:8px;background:rgba(0,0,0,0.04)}
+    .cart-row{display:flex;justify-content:space-between;gap:.6rem;padding:.45rem 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+    .cart-total{font-weight:700;font-size:1.05rem}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;padding:.45rem .65rem;border-radius:8px;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;color:white}
+
+    /* Item editor modal */
+    .sheet{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071427;border-radius:12px;padding:1rem;z-index:200;min-width:320px;display:none}
+    .sheet[aria-hidden="false"]{display:block}
+
+    @media(max-width:900px){.menu-card{grid-template-columns:1fr}.menu-right{display:none}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">VANTURE</a>
+      <div style="display:flex;gap:.6rem;align-items:center">
+        <button id="openCartBtn" class="btn" aria-haspopup="dialog" title="Open cart"> <span id="cartCount">0</span></button>
+        <button id="openVendorsBtn" class="btn btn-primary">Browse Vendors</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <h1 class="hero-title">Find local mobile vendors  modern demo</h1>
+      <p class="hero-sub">Click a vendor to open its menu. Keyboard accessible. Blue accents.</p>
+    </section>
+
+    <section class="container" aria-label="Vendors">
+      <div class="vendors-grid" id="vendorsGrid"></div>
+    </section>
+  </main>
+
+  <!-- Centered Menu Overlay -->
+  <div class="overlay" id="menuOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="menu-card" role="document" aria-labelledby="menuTitle">
+      <div class="menu-left" id="menuLeft">
+        <div class="vendor-header">
+          <img id="menuVendorThumb" src="https://via.placeholder.com/160x160?text=V" alt="Vendor" />
+          <div>
+            <div id="menuVendorName" style="font-weight:700">Vendor</div>
+            <div id="menuVendorDesc" style="color:var(--muted)">Open now  0.4 mi</div>
+          </div>
+        </div>
+        <div class="menu-list" id="menuList" tabindex="0"></div>
+      </div>
+      <aside class="menu-right" id="menuRight">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Your Cart</strong>
+          <button id="closeMenuBtn" class="btn" aria-label="Close menu">Close</button>
+        </div>
+        <div class="cart-summary">
+          <div class="cart-items" id="cartItems">No items yet.</div>
+          <div style="display:flex;flex-direction:column;gap:.4rem;margin-top:.6rem">
+            <div style="display:flex;justify-content:space-between"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+            <div style="display:flex;justify-content:space-between"><span>Tax</span><span id="cartTax">$0.00</span></div>
+            <div style="display:flex;justify-content:space-between" class="cart-total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+            <div style="display:flex;gap:.5rem;margin-top:.6rem">
+              <button id="checkoutBtn" class="btn btn-primary">Checkout</button>
+              <button id="clearCartBtn" class="btn">Clear</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Item customization sheet -->
+  <div class="sheet" id="itemSheet" aria-hidden="true" role="dialog">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
+      <strong id="itemSheetTitle">Customize</strong>
+      <button id="itemSheetClose" class="btn">Close</button>
+    </div>
+    <div id="itemSheetBody"></div>
+    <div style="display:flex;gap:.5rem;margin-top:.6rem"><button id="addItemBtn" class="btn btn-primary">Add to Cart</button></div>
+  </div>
+
+  <script>
+  // Defensive shim: provide minimal modal helpers if not present.
+  // Non-invasive — these are defined only when missing so we don't override site scripts.
+  if(typeof window.openModal === 'undefined'){
+    window.openModal = function(modal){ if(!modal) return; try{ modal._previousFocus = document.activeElement; if(modal.parentNode !== document.body) document.body.appendChild(modal); document.body.classList.add('modal-open'); modal.setAttribute('aria-hidden','false'); }catch(e){} };
+  }
+  if(typeof window.closeModal === 'undefined'){
+    window.closeModal = function(modal){ if(!modal) return; try{ if(modal._trapHandler) modal.removeEventListener('keydown', modal._trapHandler); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('modal-open'); if(modal._previousFocus && modal._previousFocus.focus) modal._previousFocus.focus(); }catch(e){} };
+  }
+  if(typeof window.modalConfirm === 'undefined'){
+    window.modalConfirm = function(message){ return Promise.resolve(window.confirm ? window.confirm(message) : true); };
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+*** End File Readout

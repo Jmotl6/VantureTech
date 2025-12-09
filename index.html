@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vanture — Minimal Frontend MVP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" id="logoWrap">
+        <img id="companyLogo" alt="Company logo" src="" style="display:none;max-height:36px;" />
+        <span id="logoText">VANTURE</span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#features">Features</a>
+        <a class="nav-link" href="#pricing">Pricing</a>
+        <a class="nav-link" href="#contact">Contact</a>
+
+        <div class="nav-dropdown" id="demoDropdown">
+          <button class="nav-link dropdown-toggle" id="demoToggle" aria-expanded="false" aria-controls="demoMenuList">Demo ▾</button>
+          <div class="dropdown-menu" id="demoMenuList" aria-hidden="true">
+            <a class="dropdown-item" href="business.html">Business</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <label class="ui-switch" title="Toggle light mode">
+          <input id="modeSwitch" type="checkbox" aria-label="Toggle light mode">
+          <div class="slider"><div class="switch-circle"></div></div>
+        </label>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero hero--parallax reveal-on-scroll">
+      <div class="container hero-inner reveal-stagger">
+        <h1 class="hero-title">Build modern experiences.</h1>
+        <p class="hero-sub">A minimalist, responsive frontend starter — black by default, light mode coming soon.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#features">Get Started</a>
+          <a class="btn btn-ghost" href="#pricing">See Pricing</a>
+        </div>
+        <div class="hero-notes" style="margin-top:1rem;color:var(--muted);font-size:.95rem">Trusted by early teams building beta UIs — clean, fast, and accessible.</div>
+      </div>
+    </section>
+
+    <section id="features" class="features reveal-on-scroll">
+      <div class="container">
+        <h2 class="section-title">Features</h2>
+        <p class="section-sub">Essentials for a clean, modern landing page.</p>
+
+        <div class="features-grid reveal-stagger">
+          <div class="flip-card">
+            <div class="flip-card__content">
+              <p class="flip-card__front-text"><span>Location</span></p>
+            </div>
+            <div class="flip-card__back">
+              <div class="back-content">
+                <p class="flip-card__title">Book a location</p>
+                <p class="flip-card__description">Food truck operators book a parking location to set up.</p>
+              </div>
+              <div class="circle"></div>
+              <div class="circle" id="right"></div>
+              <div class="circle" id="bottom"></div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card__content">
+              <p class="flip-card__front-text"><span>Set Up</span></p>
+            </div>
+            <div class="flip-card__back">
+              <div class="back-content">
+                <p class="flip-card__title">Set Up for Operations</p>
+                <p class="flip-card__description">Set up your truck and manage your inventory.</p>
+              </div>
+              <div class="circle"></div>
+              <div class="circle" id="right"></div>
+              <div class="circle" id="bottom"></div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card__content">
+              <p class="flip-card__front-text">Serve</p>
+            </div>
+            <div class="flip-card__back">
+              <div class="back-content">
+                <p class="flip-card__title">Serve</p>
+                <p class="flip-card__description">Start selling food and accept delivery and in-person orders over the app.</p>
+              </div>
+              <div class="circle"></div>
+              <div class="circle" id="right"></div>
+              <div class="circle" id="bottom"></div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card__content">
+              <p class="flip-card__front-text">Wrap Up</p>
+            </div>
+            <div class="flip-card__back">
+              <div class="back-content">
+                <p class="flip-card__title">That easy</p>
+                <p class="flip-card__description">When you're done for the day, move to the next location or wrap up for the day!</p>
+              </div>
+              <div class="circle"></div>
+              <div class="circle" id="right"></div>
+              <div class="circle" id="bottom"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- B2B demo removed from main page; available on Business page -->
+
+    <section id="pricing" class="placeholder-section reveal-on-scroll">
+      <div class="container">
+        <h2 class="section-title">Pricing</h2>
+        <p class="section-sub">Placeholder pricing section — content coming soon.</p>
+      </div>
+    </section>
+    <!-- contact removed from page; replaced by CTA at bottom -->
+  </main>
+
+  <!-- Request Access modal -->
+  <div class="modal" id="requestModal" aria-hidden="true">
+    <div class="modal-inner">
+      <button class="btn" id="closeRequestModal">Close</button>
+      <h3>Request Access</h3>
+      <p>Select an option below to continue.</p>
+      <div style="display:flex;gap:0.5rem;margin-top:1rem">
+        <button class="btn btn-primary" id="confirmRequest">Request Access</button>
+        <button class="btn" id="openContactFromRequest">Contact Us</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Role selection modal -->
+  <div class="modal" id="roleModal" aria-hidden="true">
+    <div class="modal-inner">
+      <button class="btn" id="closeRoleModal">Close</button>
+      <h3>Who are you?</h3>
+      <p>Choose the role that best describes you.</p>
+      <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap">
+        <button class="btn btn-primary" id="roleVendor">Vendor</button>
+        <button class="btn btn-primary" id="roleLot">Lot Owner</button>
+        <button class="btn btn-primary" id="roleCustomer">Customer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendor form modal -->
+  <div class="modal" id="vendorFormModal" aria-hidden="true">
+    <div class="modal-inner">
+      <button class="btn" id="closeVendorModal">Close</button>
+      <h3>Vendor Request</h3>
+      <form id="vendorForm">
+        <label>Full Name<input type="text" name="fullName" required></label>
+        <label>Business Email<input type="email" name="email" required></label>
+        <label>Phone Number (optional)<input type="tel" name="phone"></label>
+        <label>Business Name<input type="text" name="business" required></label>
+        <label style="display:flex;align-items:center;gap:.5rem"><input type="checkbox" name="consent"> I want to use your product in the future</label>
+        <div style="margin-top:1rem;display:flex;gap:.5rem">
+          <button class="btn btn-primary" type="submit">Send Request</button>
+          <button class="btn" type="button" id="vendorCancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lot owner form modal -->
+  <div class="modal" id="lotFormModal" aria-hidden="true">
+    <div class="modal-inner">
+      <button class="btn" id="closeLotModal">Close</button>
+      <h3>Lot Owner Request</h3>
+      <form id="lotForm">
+        <label>Full Name<input type="text" name="fullName" required></label>
+        <label>Business Email<input type="email" name="email" required></label>
+        <label>Phone Number (optional)<input type="tel" name="phone"></label>
+        <label>Business Name (optional)<input type="text" name="business"></label>
+        <label>Location / Address<input type="text" name="location" placeholder="Address or general area" required></label>
+        <label style="display:flex;align-items:center;gap:.5rem"><input type="checkbox" name="consent"> I want to use your product in the future</label>
+        <div style="margin-top:1rem;display:flex;gap:.5rem">
+          <button class="btn btn-primary" type="submit">Send Request</button>
+          <button class="btn" type="button" id="lotCancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Customer form modal -->
+  <div class="modal" id="customerFormModal" aria-hidden="true">
+    <div class="modal-inner">
+      <button class="btn" id="closeCustomerModal">Close</button>
+      <h3>Customer Request</h3>
+      <form id="customerForm">
+        <label>Name<input type="text" name="name" required></label>
+        <label>Email<input type="email" name="email" required></label>
+        <label>What are you interested in?<textarea name="notes" rows="3" placeholder="Tell us what you'd like to see"></textarea></label>
+        <div style="margin-top:1rem;display:flex;gap:.5rem">
+          <button class="btn btn-primary" type="submit">Send Request</button>
+          <button class="btn" type="button" id="customerCancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contact modal (simple) -->
+  <div class="modal" id="contactModal" aria-hidden="true">
+    <div class="modal-inner">
+      <button class="btn" id="closeContactModal">Close</button>
+      <h3>Contact Us</h3>
+      <p>Send an email to <a href="mailto:joshua.motley@vanturetech.com">joshua.motley@vanturetech.com</a> or use your preferred support channel.</p>
+    </div>
+  </div>
+
+  <!-- Bottom CTA section (moved) -->
+  <section id="cta" class="cta reveal-on-scroll">
+    <div class="container cta-inner reveal-stagger">
+      <h2>Ready to start?</h2>
+      <p>Sign up for early access and be first to try upcoming features.</p>
+      <button class="btn btn-cta" id="mainRequestBtn">Request Access</button>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="logo small">VANTURE</div>
+        <small>© <span id="year">2025</span> Vanture. All rights reserved.</small>
+      </div>
+
+      <div class="footer-right">
+        <nav class="footer-nav">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="socials">🔗 ⚙️ ✉️</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

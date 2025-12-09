@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vanture — Consumer Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js"></script>
+  <!-- Leaflet for demo map (works without MapKit tokens) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" id="logoWrap">
+        <img id="companyLogo" alt="Company logo" src="" style="display:none;max-height:36px;" />
+        <span id="logoText">VANTURE</span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="index.html#features">Features</a>
+        <a class="nav-link" href="index.html#pricing">Pricing</a>
+        <a class="nav-link" href="index.html#reserve">Reserve</a>
+        <div class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" id="demoToggle">Demo ▾</button>
+          <div class="dropdown-menu" aria-hidden="true">
+            <a class="dropdown-item" href="consumer.html">Consumer</a>
+            <a class="dropdown-item" href="business.html">Business</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <label class="ui-switch" title="Toggle light mode">
+          <input id="modeSwitch" type="checkbox" aria-label="Toggle light mode">
+          <div class="slider"><div class="switch-circle"></div></div>
+        </label>
+        <button id="openCartBtn" class="btn" aria-label="Open cart" title="Cart" aria-haspopup="dialog" style="position:relative;margin-left:.6rem">
+          🛒 <span id="cartCountBadge" class="cart-badge" aria-hidden="false">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--parallax reveal-on-scroll">
+      <div class="container hero-inner reveal-stagger">
+        <h1 class="hero-title">Discover mobile vendors near you</h1>
+        <p class="hero-sub">Find food trucks and mobile vendors in your area — demo only.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#search">Find Vendors</a>
+          <button id="openMenuBtn" class="btn btn-primary" aria-haspopup="dialog" aria-controls="menuModal">View Menu</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="search" class="features reveal-on-scroll">
+      <div class="container">
+        <h2 class="section-title">Search</h2>
+        <p class="section-sub">Demo.</p>
+
+        <div class="search-demo">
+          <div class="search-input-wrap">
+            <input id="demoSearchInput" class="demo-search" placeholder="Enter city or ZIP or address" aria-label="Search vendors by city or ZIP" />
+            <div class="search-actions">
+              <button class="btn btn-search" id="demoSearchBtn">Search</button>
+              <button class="btn" id="demoSearchClear" title="Clear search">Clear</button>
+            </div>
+          </div>
+          <div id="searchResult" class="search-result" aria-live="polite">Type a city or ZIP and press Enter or click Search.</div>
+        </div>
+
+        <div class="vendors-grid reveal-stagger" id="vendorsGrid">
+          <!-- Vendor cards populated in HTML for demo -->
+          <!-- Expanded vendor list -->
+          <article class="vendor-card" data-id="v1" data-lat="37.7749" data-lon="-122.4194" role="article" aria-label="Tom's Tacos" tabindex="0">
+            <div class="unique-card">
+              <img class="thumbnail" src="images/truck1.jpg" alt="Tom's Tacos" loading="lazy" width="560" height="280" data-fallback="https://via.placeholder.com/560x280?text=Tom's+Tacos" />
+              <div class="background-overlay"></div>
+              <div class="card-content">
+                <div class="card-title">Tom's Tacos</div>
+                <div class="card-description">Fresh tacos, daily specials.</div>
+                <div class="vendor-meta"><span class="stars" aria-hidden="true">★★★★☆</span><span class="distance">• 0.6 mi</span></div>
+                <div class="card-actions" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="vendor-card" data-id="v2" data-lat="37.7849" data-lon="-122.4094" role="article" aria-label="Sally's Sandwiches" tabindex="0">
+            <div class="unique-card">
+              <img class="thumbnail" src="images/truck2.jpg" alt="Sally's Sandwiches" loading="lazy" width="560" height="280" data-fallback="https://via.placeholder.com/560x280?text=Sally's+Sandwiches" />
+              <div class="background-overlay"></div>
+              <div class="card-content">
+                <div class="card-title">Sally's Sandwiches</div>
+                <div class="card-description">Gourmet sandwiches on the go.</div>
+                <div class="vendor-meta"><span class="stars" aria-hidden="true">★★★★★</span><span class="distance">• 0.3 mi</span></div>
+                <div class="card-actions" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="vendor-card" data-id="v3" data-lat="37.7649" data-lon="-122.4294" role="article" aria-label="Bella Pizza" tabindex="0">
+            <div class="unique-card">
+              <img class="thumbnail" src="images/truck3.jpg" alt="Bella Pizza" loading="lazy" width="560" height="280" data-fallback="https://via.placeholder.com/560x280?text=Bella+Pizza" />
+              <div class="background-overlay"></div>
+              <div class="card-content">
+                <div class="card-title">Bella Pizza</div>
+                <div class="card-description">Wood-fired slices and whole pies.</div>
+                <div class="vendor-meta"><span class="stars" aria-hidden="true">★★★☆☆</span><span class="distance">• 1.2 mi</span></div>
+                <div class="card-actions" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="vendor-card" data-id="v4" data-lat="37.7725" data-lon="-122.4148" role="article" aria-label="Luna Bowls" tabindex="0">
+            <div class="unique-card">
+              <img class="thumbnail" src="images/truck4.jpg" alt="Luna Bowls" loading="lazy" width="560" height="280" data-fallback="https://via.placeholder.com/560x280?text=Luna+Bowls" />
+              <div class="background-overlay"></div>
+              <div class="card-content">
+                <div class="card-title">Luna Bowls</div>
+                <div class="card-description">Healthy grain bowls and smoothies.</div>
+                <div class="vendor-meta"><span class="stars" aria-hidden="true">★★★★☆</span><span class="distance">• 0.9 mi</span></div>
+                <div class="card-actions" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="vendor-card" data-id="v5" data-lat="37.7701" data-lon="-122.4230" role="article" aria-label="The Crepe Cart" tabindex="0">
+            <div class="unique-card">
+              <img class="thumbnail" src="images/truck5.jpg" alt="The Crepe Cart" loading="lazy" width="560" height="280" data-fallback="https://via.placeholder.com/560x280?text=Crepe+Cart" />
+              <div class="background-overlay"></div>
+              <div class="card-content">
+                <div class="card-title">The Crepe Cart</div>
+                <div class="card-description">Savory and sweet crepes.</div>
+                <div class="vendor-meta"><span class="stars" aria-hidden="true">★★★★★</span><span class="distance">• 0.4 mi</span></div>
+                <div class="card-actions" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="vendor-card" data-id="v6" data-lat="37.7682" data-lon="-122.4350" role="article" aria-label="Green Curry Truck" tabindex="0">
+            <div class="unique-card">
+              <img class="thumbnail" src="images/truck6.jpg" alt="Green Curry Truck" loading="lazy" width="560" height="280" data-fallback="https://via.placeholder.com/560x280?text=Green+Curry" />
+              <div class="background-overlay"></div>
+              <div class="card-content">
+                <div class="card-title">Green Curry Truck</div>
+                <div class="card-description">Authentic Thai street food.</div>
+                <div class="vendor-meta"><span class="stars" aria-hidden="true">★★★★☆</span><span class="distance">• 1.1 mi</span></div>
+                <div class="card-actions" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="vendor-card" data-id="v7" data-lat="37.7790" data-lon="-122.4180" role="article" aria-label="Burger Lab" tabindex="0">
+            <div class="unique-card">
+              <img class="thumbnail" src="images/truck7.jpg" alt="Burger Lab" loading="lazy" width="560" height="280" data-fallback="https://via.placeholder.com/560x280?text=Burger+Lab" />
+              <div class="background-overlay"></div>
+              <div class="card-content">
+                <div class="card-title">Burger Lab</div>
+                <div class="card-description">Artisan burgers and fries.</div>
+                <div class="vendor-meta"><span class="stars" aria-hidden="true">★★★☆☆</span><span class="distance">• 2.0 mi</span></div>
+                <div class="card-actions" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="vendor-card" data-id="v8" data-lat="37.7765" data-lon="-122.4125" role="article" aria-label="Sweet Rolls" tabindex="0">
+            <div class="unique-card">
+              <img class="thumbnail" src="images/truck8.jpg" alt="Sweet Rolls" loading="lazy" width="560" height="280" data-fallback="https://via.placeholder.com/560x280?text=Sweet+Rolls" />
+              <div class="background-overlay"></div>
+              <div class="card-content">
+                <div class="card-title">Sweet Rolls</div>
+                <div class="card-description">Fresh baked pastries and coffee.</div>
+                <div class="vendor-meta"><span class="stars" aria-hidden="true">★★★★☆</span><span class="distance">• 0.8 mi</span></div>
+                <div class="card-actions" aria-hidden="true"></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="map-preview reveal-on-scroll">
+          <h3>Map Preview</h3>
+          <div id="map" class="map-container" aria-hidden="false">
+            <!-- MapKit will initialize here; fallback will show a static image if unavailable -->
+            <img id="mapFallback" src="https://via.placeholder.com/900x360?text=Map+Preview" alt="Map preview fallback" style="width:100%;height:auto;display:block" />
+          </div>
+          <div class="map-pins">
+            <button class="map-pin" data-target="v1">Pin 1</button>
+            <button class="map-pin" data-target="v2">Pin 2</button>
+            <button class="map-pin" data-target="v3">Pin 3</button>
+            <button class="map-pin" data-target="v4">Pin 4</button>
+            <button class="map-pin" data-target="v5">Pin 5</button>
+            <button class="map-pin" data-target="v6">Pin 6</button>
+            <button class="map-pin" data-target="v7">Pin 7</button>
+            <button class="map-pin" data-target="v8">Pin 8</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart modal: shows current cart with tax, fees, and checkout button -->
+    <div class="modal" id="cartModal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="menu-panel" role="document" style="max-width:520px;">
+        <div class="modal-inner">
+          <header class="menu-header">
+            <h3 class="menu-title">Your Cart</h3>
+            <div class="menu-actions"><button id="cartCloseBtn" class="btn" aria-label="Close cart">Close</button></div>
+          </header>
+          <div id="cartModalBody">
+            <div id="cartModalItems" class="menu-cart-items" aria-live="polite">Your cart is empty.</div>
+            <div id="cartModalSummary" style="margin-top:12px">
+              <div style="display:flex;justify-content:space-between;">Subtotal:<span id="cartModalSubtotal">$0.00</span></div>
+              <div style="display:flex;justify-content:space-between;">Tax (<span id="cartTaxRate">8%</span>):<span id="cartModalTax">$0.00</span></div>
+              <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:8px">Total:<span id="cartModalTotal">$0.00</span></div>
+              <div style="display:flex;gap:.6rem;margin-top:12px">
+                <button id="cartCheckoutBtn" class="btn btn-primary">Checkout</button>
+                <button id="cartClearBtn" class="btn">Clear Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+              <!-- Vendor-switch confirmation modal -->
+              <div class="modal" id="vendorSwitchModal" aria-hidden="true" role="dialog" aria-modal="true">
+                <div class="menu-panel" role="document" style="max-width:480px;">
+                  <div class="modal-inner">
+                    <header class="menu-header">
+                      <h4 class="menu-title">Switch vendor?</h4>
+                    </header>
+                    <div style="padding:12px 6px" id="vendorSwitchBody">
+                      <p id="vendorSwitchMessage">Your cart contains items from another vendor. Clear the cart and start an order at this vendor?</p>
+                      <div style="display:flex;gap:.6rem;justify-content:flex-end;margin-top:12px">
+                        <button id="vendorSwitchCancel" class="btn">Cancel</button>
+                        <button id="vendorSwitchConfirm" class="btn btn-primary">Confirm</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+    <!-- Menu modal: modern, responsive ordering interface -->
+    <div class="modal" id="menuModal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="menu-panel" role="document">
+        <div class="modal-inner">
+          <div class="menu-left">
+            <header class="menu-header">
+              <div>
+                <h3 class="menu-title">Food Truck Menu</h3>
+                <div class="vendor-info" id="vendorInfo" aria-hidden="true">
+                  <img id="vendorThumb" class="vendor-thumb" src="" alt="" style="display:none;width:72px;height:56px;border-radius:8px;object-fit:cover;margin-right:.75rem" />
+                  <div class="vendor-meta-small">
+                    <div id="vendorNameSmall" class="vendor-name-small"></div>
+                    <div id="vendorMetaSmall" class="vendor-meta-small-sub" style="font-size:.9rem;color:var(--muted)"></div>
+                  </div>
+                </div>
+                <nav class="menu-nav" aria-label="Menu sections">
+                  <button class="menu-nav-btn" data-target="specials">Specials</button>
+                  <button class="menu-nav-btn" data-target="mains">Mains</button>
+                  <button class="menu-nav-btn" data-target="sides">Sides</button>
+                  <button class="menu-nav-btn" data-target="drinks">Drinks</button>
+                </nav>
+              </div>
+              <div class="menu-actions">
+                <button id="menuCloseBtn" class="btn" aria-label="Close menu">Close</button>
+              </div>
+            </header>
+
+            <div id="menuItemsList" class="menu-items-list">
+              <div class="menu-column" id="section-specials">
+                <h4 class="section-title">Specials</h4>
+                <div class="section-items" data-section="specials"></div>
+              </div>
+              <div class="menu-column" id="section-mains">
+                <h4 class="section-title">Mains</h4>
+                <div class="section-items" data-section="mains"></div>
+              </div>
+              <div class="menu-column" id="section-sides">
+                <h4 class="section-title">Sides</h4>
+                <div class="section-items" data-section="sides"></div>
+              </div>
+              <div class="menu-column" id="section-drinks">
+                <h4 class="section-title">Drinks</h4>
+                <div class="section-items" data-section="drinks"></div>
+              </div>
+            </div>
+
+            <!-- Item editor moved to a separate modal (`#itemModal`) to keep the list clean -->
+          </div>
+
+          <aside class="menu-cart-summary" id="menuCartSummary">
+            <div id="cartItems" class="menu-cart-items" aria-live="polite">Your cart is empty.</div>
+            <div class="menu-cart-checkout">
+              <div class="total">Subtotal: <span id="cartSubtotal">$0.00</span></div>
+              <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+            </div>
+          </aside>
+        </div>
+
+        
+
+      </div>
+    </div>
+    <!-- Separate item customization modal (opened when adding/editing an item) -->
+    <div class="modal" id="itemModal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="menu-panel" role="document" style="max-width:600px;">
+        <div class="modal-inner">
+          <div class="menu-header" style="margin:0 0 .5rem;">
+            <h4 id="editorTitle">Customize Item</h4>
+            <button id="itemModalClose" class="btn" aria-label="Close customization">Close</button>
+          </div>
+          <form id="editorForm">
+            <div id="editorOptions" class="editor-options"></div>
+            <div style="display:flex;gap:.6rem;align-items:center;margin-top:8px">
+              <label style="display:flex;flex-direction:column"><span>Qty</span><input id="editorQty" type="number" min="1" value="1" style="width:72px;padding:.35rem;border-radius:6px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:inherit" /></label>
+              <div style="margin-left:auto"><strong>Item total: <span id="editorItemTotal">$0.00</span></strong></div>
+            </div>
+            <div style="display:flex;gap:.6rem;margin-top:10px">
+              <button type="submit" class="btn btn-primary">Add to cart</button>
+              <button type="button" class="btn" id="editorCancel">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+      <!-- externalCart removed — cart is unified inside the menu modal now -->
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="logo small">VANTURE</div>
+        <small>© <span id="year">2025</span> Vanture. All rights reserved.</small>
+      </div>
+      <div class="footer-right">
+        <nav class="footer-nav">
+          <a href="index.html">Home</a>
+          <a href="index.html#features">Features</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vanture — Consumer Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js"></script>
+  <!-- Leaflet for demo map (works without MapKit tokens) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" id="logoWrap">
+        <img id="companyLogo" alt="Company logo" src="" style="display:none;max-height:36px;" />
+        <span id="logoText">VANTURE</span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="index.html#features">Features</a>
+        <a class="nav-link" href="index.html#pricing">Pricing</a>
+        <a class="nav-link" href="index.html#reserve">Reserve</a>
+        <div class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" id="demoToggle">Demo ▾</button>
+          <div class="dropdown-menu" aria-hidden="true">
+            <a class="dropdown-item" href="consumer.html">Consumer</a>
+            <a class="dropdown-item" href="business.html">Business</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <label class="ui-switch" title="Toggle light mode">
+          <input id="modeSwitch" type="checkbox" aria-label="Toggle light mode">
+          <div class="slider"><div class="switch-circle"></div></div>
+        </label>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--parallax reveal-on-scroll">
+      <div class="container hero-inner reveal-stagger">
+        <h1 class="hero-title">Discover mobile vendors near you</h1>
+        <p class="hero-sub">Find food trucks and mobile vendors in your area — demo only.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#search">Find Vendors</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="search" class="features reveal-on-scroll">
+      <div class="container">
+        <h2 class="section-title">Search</h2>
+        <p class="section-sub">Demo.</p>
+
+        <div class="search-demo">
+          <div class="search-input-wrap">
+            <input id="demoSearchInput" class="demo-search" placeholder="Enter city or ZIP or address" aria-label="Search vendors by city or ZIP" />
+            <div class="search-actions">
+              <button class="btn btn-search" id="demoSearchBtn">Search</button>
+              <button class="btn" id="demoSearchClear" title="Clear search">Clear</button>
+            </div>
+          </div>
+          <div id="searchResult" class="search-result" aria-live="polite">Type a city or ZIP and press Enter or click Search.</div>
+        </div>
+
+
+n... (backup created)
